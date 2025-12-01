@@ -1,0 +1,17 @@
+/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Infrastructure/obj/Debug/net10.0/MedicalImageProcessor.Infrastructure.csproj.AssemblyReference.cache
+/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Infrastructure/obj/Debug/net10.0/MedicalImageProcessor.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Infrastructure/obj/Debug/net10.0/MedicalImageProcessor.Infrastructure.AssemblyInfoInputs.cache
+/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Infrastructure/obj/Debug/net10.0/MedicalImageProcessor.Infrastructure.AssemblyInfo.cs
+/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Infrastructure/obj/Debug/net10.0/MedicalImageProcessor.Infrastructure.csproj.CoreCompileInputs.cache
+/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Infrastructure/bin/Debug/net10.0/MedicalImageProcessor.Infrastructure.deps.json
+/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Infrastructure/bin/Debug/net10.0/MedicalImageProcessor.Infrastructure.dll
+/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Infrastructure/bin/Debug/net10.0/MedicalImageProcessor.Infrastructure.pdb
+/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Infrastructure/bin/Debug/net10.0/MedicalImageProcessor.Application.dll
+/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Infrastructure/bin/Debug/net10.0/MedicalImageProcessor.Core.dll
+/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Infrastructure/bin/Debug/net10.0/MedicalImageProcessor.Application.pdb
+/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Infrastructure/bin/Debug/net10.0/MedicalImageProcessor.Core.pdb
+/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Infrastructure/obj/Debug/net10.0/MedicalI.BD26396A.Up2Date
+/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Infrastructure/obj/Debug/net10.0/MedicalImageProcessor.Infrastructure.dll
+/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Infrastructure/obj/Debug/net10.0/refint/MedicalImageProcessor.Infrastructure.dll
+/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Infrastructure/obj/Debug/net10.0/MedicalImageProcessor.Infrastructure.pdb
+/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Infrastructure/obj/Debug/net10.0/ref/MedicalImageProcessor.Infrastructure.dll
