@@ -1,0 +1,12 @@
+/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Core/bin/Debug/net10.0/MedicalImageProcessor.Core.deps.json
+/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Core/bin/Debug/net10.0/MedicalImageProcessor.Core.dll
+/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Core/bin/Debug/net10.0/MedicalImageProcessor.Core.pdb
+/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Core/obj/Debug/net10.0/MedicalImageProcessor.Core.csproj.AssemblyReference.cache
+/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Core/obj/Debug/net10.0/MedicalImageProcessor.Core.GeneratedMSBuildEditorConfig.editorconfig
+/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Core/obj/Debug/net10.0/MedicalImageProcessor.Core.AssemblyInfoInputs.cache
+/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Core/obj/Debug/net10.0/MedicalImageProcessor.Core.AssemblyInfo.cs
+/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Core/obj/Debug/net10.0/MedicalImageProcessor.Core.csproj.CoreCompileInputs.cache
+/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Core/obj/Debug/net10.0/MedicalImageProcessor.Core.dll
+/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Core/obj/Debug/net10.0/refint/MedicalImageProcessor.Core.dll
+/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Core/obj/Debug/net10.0/MedicalImageProcessor.Core.pdb
+/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Core/obj/Debug/net10.0/ref/MedicalImageProcessor.Core.dll
