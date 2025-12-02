@@ -1,7 +1,9 @@
 export interface DetectionResult {
-  hasBrainTumor: boolean;
-  brainTumorConfidence: number;
-  hasFracture: boolean;
-  fractureConfidence: number;
-  imageId: string;
+    imageId: string;
+    hasBrainTumor: boolean;
+    brainTumorConfidence: number;
+    hasFracture: boolean;
+    fractureConfidence: number;
+    createdAt: string;
+    image_url?: string;
 }
