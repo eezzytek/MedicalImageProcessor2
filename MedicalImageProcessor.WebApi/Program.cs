@@ -10,6 +10,17 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:5173") // your Vite frontend
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials(); // if sending cookies / auth
+        });
+});
 // Controllers
 builder.Services.AddControllers();
 
@@ -68,7 +79,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
-
+app.UseCors("AllowFrontend");
 // Middleware
 if (app.Environment.IsDevelopment())
 {
@@ -82,15 +93,6 @@ if (app.Environment.IsDevelopment())
         c.EnablePersistAuthorization(); // зберігати токен після введення
     });
 }
-
-app.UseHttpsRedirection();
-
-app.UseCors(builder => builder
-    .AllowAnyOrigin()
-    .AllowAnyMethod()
-    .AllowAnyHeader());
-
-app.UseCors();
 
 app.UseAuthentication();
 app.UseAuthorization();

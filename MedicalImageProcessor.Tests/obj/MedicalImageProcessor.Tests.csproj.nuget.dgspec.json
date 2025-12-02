@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Tests/MedicalImageProcessor.Tests.csproj": {}
+    "/Users/vladyslav.husenko/Downloads/MedicalImageProcessor2/MedicalImageProcessor2/MedicalImageProcessor.Tests/MedicalImageProcessor.Tests.csproj": {}
   },
   "projects": {
-    "/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Tests/MedicalImageProcessor.Tests.csproj": {
+    "/Users/vladyslav.husenko/Downloads/MedicalImageProcessor2/MedicalImageProcessor2/MedicalImageProcessor.Tests/MedicalImageProcessor.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Tests/MedicalImageProcessor.Tests.csproj",
+        "projectUniqueName": "/Users/vladyslav.husenko/Downloads/MedicalImageProcessor2/MedicalImageProcessor2/MedicalImageProcessor.Tests/MedicalImageProcessor.Tests.csproj",
         "projectName": "MedicalImageProcessor.Tests",
-        "projectPath": "/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Tests/MedicalImageProcessor.Tests.csproj",
+        "projectPath": "/Users/vladyslav.husenko/Downloads/MedicalImageProcessor2/MedicalImageProcessor2/MedicalImageProcessor.Tests/MedicalImageProcessor.Tests.csproj",
         "packagesPath": "/Users/vladyslav.husenko/.nuget/packages/",
-        "outputPath": "/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Tests/obj/",
+        "outputPath": "/Users/vladyslav.husenko/Downloads/MedicalImageProcessor2/MedicalImageProcessor2/MedicalImageProcessor.Tests/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/vladyslav.husenko/.nuget/NuGet/NuGet.Config"

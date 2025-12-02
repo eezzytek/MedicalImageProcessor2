@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "nisQA0QHKC4=",
+  "dgSpecHash": "ppU7cZxMt4o=",
   "success": true,
-  "projectFilePath": "/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Tests/MedicalImageProcessor.Tests.csproj",
+  "projectFilePath": "/Users/vladyslav.husenko/Downloads/MedicalImageProcessor2/MedicalImageProcessor2/MedicalImageProcessor.Tests/MedicalImageProcessor.Tests.csproj",
   "expectedPackageFiles": [
     "/Users/vladyslav.husenko/.nuget/packages/coverlet.collector/6.0.4/coverlet.collector.6.0.4.nupkg.sha512",
     "/Users/vladyslav.husenko/.nuget/packages/microsoft.codecoverage/17.14.1/microsoft.codecoverage.17.14.1.nupkg.sha512",

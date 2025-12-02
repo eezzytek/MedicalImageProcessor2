@@ -10,6 +10,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalImageProcessor.WebAp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalImageProcessor.Tests", "MedicalImageProcessor.Tests\MedicalImageProcessor.Tests.csproj", "{45CA3E7D-8F16-422E-909F-54B19767F694}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalImageProcessor.IdentityServer", "MedicalImageProcessor.IdentityServer\MedicalImageProcessor.IdentityServer.csproj", "{C9EDCE85-0982-41BE-9482-580284674010}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalImageProcessor.Mobile", "MedicalImageProcessor.Mobile\MedicalImageProcessor.Mobile.csproj", "{493CDAAE-A4D5-4468-9A14-BC44D6E0497C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +40,13 @@ Global
 		{45CA3E7D-8F16-422E-909F-54B19767F694}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45CA3E7D-8F16-422E-909F-54B19767F694}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45CA3E7D-8F16-422E-909F-54B19767F694}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9EDCE85-0982-41BE-9482-580284674010}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9EDCE85-0982-41BE-9482-580284674010}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9EDCE85-0982-41BE-9482-580284674010}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9EDCE85-0982-41BE-9482-580284674010}.Release|Any CPU.Build.0 = Release|Any CPU
+		{493CDAAE-A4D5-4468-9A14-BC44D6E0497C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{493CDAAE-A4D5-4468-9A14-BC44D6E0497C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{493CDAAE-A4D5-4468-9A14-BC44D6E0497C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{493CDAAE-A4D5-4468-9A14-BC44D6E0497C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

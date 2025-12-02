@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "JaA2oREv5LM=",
+  "dgSpecHash": "MdLu/JTMz2s=",
   "success": true,
-  "projectFilePath": "/Users/vladyslav.husenko/RiderProjects/MedicalImageProcessor/MedicalImageProcessor.Core/MedicalImageProcessor.Core.csproj",
+  "projectFilePath": "/Users/vladyslav.husenko/Downloads/MedicalImageProcessor2/MedicalImageProcessor2/MedicalImageProcessor.Core/MedicalImageProcessor.Core.csproj",
   "expectedPackageFiles": [
     "/Users/vladyslav.husenko/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/9.0.11/microsoft.aspnetcore.authentication.jwtbearer.9.0.11.nupkg.sha512",
     "/Users/vladyslav.husenko/.nuget/packages/microsoft.identitymodel.abstractions/8.0.1/microsoft.identitymodel.abstractions.8.0.1.nupkg.sha512",

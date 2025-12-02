@@ -10,7 +10,7 @@ using System.Collections.Concurrent;  // Для ConcurrentDictionary
 public class AuthController : ControllerBase
 {
     private readonly IConfiguration _config;
-    private static readonly ConcurrentDictionary<string, string> Users = new();  // ФІКС: In-memory users (username → hashed password)
+    private static readonly ConcurrentDictionary<string, UserRecord> Users = new();  // ФІКС: In-memory users (username → hashed password)
 
     public AuthController(IConfiguration config)
     {
@@ -20,35 +20,43 @@ public class AuthController : ControllerBase
     [HttpPost("register")]
     public IActionResult Register([FromBody] RegisterDto dto)
     {
-        if (string.IsNullOrEmpty(dto.Username) || string.IsNullOrEmpty(dto.Password))
+        if (string.IsNullOrEmpty(dto.Email) || string.IsNullOrEmpty(dto.Password))
             return BadRequest("Username and password required");
 
-        if (Users.ContainsKey(dto.Username))
+        if (Users.ContainsKey(dto.Email))
             return BadRequest("User already exists");
 
+        var userId = Guid.NewGuid().ToString();
         // ФІКС: Зберігаємо hashed password (проста хеш, в production — BCrypt)
         var hashedPassword = SimpleHash(dto.Password);  // Заміни на реальний hash
-        Users[dto.Username] = hashedPassword;
+        Users[dto.Email] = new UserRecord(userId, hashedPassword);
 
-        return Ok(new { Token = GenerateToken(dto.Username) });
+        return Ok(new { Token = GenerateToken(dto.Email, userId) });
     }
 
     [HttpPost("login")]
     public IActionResult Login([FromBody] LoginDto dto)
     {
-        if (string.IsNullOrEmpty(dto.Username) || string.IsNullOrEmpty(dto.Password))
-            return BadRequest("Username and password required");
+        if (!Users.TryGetValue(dto.Email, out var user))
+            return Unauthorized("Invalid credentials");
 
-        if (!Users.TryGetValue(dto.Username, out var hashedPassword) || SimpleHash(dto.Password) != hashedPassword)
-            return Unauthorized("Invalid credentials");  // ФІКС: Перевірка з hash
+        if (SimpleHash(dto.Password) != user.HashedPassword)
+            return Unauthorized("Invalid credentials");
 
-        return Ok(new { Token = GenerateToken(dto.Username) });
+        return Ok(new { Token = GenerateToken(dto.Email, user.UserId) });
     }
 
-    private string GenerateToken(string username)
+    private string GenerateToken(string username, string userId)
     {
-        var claims = new[] { new Claim(ClaimTypes.Name, username) };
+        
+        var claims = new[]
+        {
+            new Claim(ClaimTypes.Name, username),
+            new Claim(ClaimTypes.NameIdentifier, userId)
+        };
+        
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"] ?? "your-secret-key-min-32-chars"));
+        
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
         var token = new JwtSecurityToken(
@@ -68,5 +76,6 @@ public class AuthController : ControllerBase
     }
 }
 
-public class LoginDto { public string Username { get; set; } = string.Empty; public string Password { get; set; } = string.Empty; }
-public class RegisterDto { public string Username { get; set; } = string.Empty; public string Password { get; set; } = string.Empty; }
+public class LoginDto { public string Email { get; set; } = string.Empty; public string Password { get; set; } = string.Empty; }
+public class RegisterDto { public string Email { get; set; } = string.Empty; public string Password { get; set; } = string.Empty; }
+public record UserRecord (string UserId, string HashedPassword);

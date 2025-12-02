@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MedicalImageProcessor.WebApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+86c756efb36e7d864a37ba68e1886065c99b3d0d")]
 [assembly: System.Reflection.AssemblyProductAttribute("MedicalImageProcessor.WebApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MedicalImageProcessor.WebApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
