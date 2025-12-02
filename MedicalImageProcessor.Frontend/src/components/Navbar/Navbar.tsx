@@ -10,7 +10,7 @@ export const Navbar = () => {
       <div className="navbar__links">
         {user ? (
           <>
-            <span className="navbar__user">Hello, User</span>
+            <span className="navbar__user">Hello, {user.username}</span>
             <button className="navbar__button" onClick={logout}>
               Logout
             </button>
