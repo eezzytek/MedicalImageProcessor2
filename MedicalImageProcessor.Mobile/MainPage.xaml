@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="MedicalImageProcessor.Mobile.MainPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             BackgroundColor="#eef2f5"
+             Title="Medical Analyzer">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="25" Padding="25">
+
+            <!-- Header -->
+            <Label Text="Medical Image Analyzer"
+                   FontSize="30"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="#2457c5"/>
+
+            <!-- Card -->
+            <Frame CornerRadius="20"
+                   Padding="20"
+                   BackgroundColor="White"
+                   HasShadow="True">
+
+                <VerticalStackLayout Spacing="15">
+
+                    <Label Text="Авторизація"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="#333" />
+
+                    <Entry x:Name="UsernameEntry"
+                           Placeholder="Username"
+                           BackgroundColor="#f1f4f8"
+                           HeightRequest="45"
+                           />
+
+                    <Entry x:Name="PasswordEntry"
+                           Placeholder="Password"
+                           IsPassword="True"
+                           BackgroundColor="#f1f4f8"
+                           HeightRequest="45"
+                           />
+
+                    <Grid ColumnDefinitions="*,*"
+                          ColumnSpacing="10">
+
+                        <Button Text="Login"
+                                x:Name="LoginButton"
+                                Clicked="OnLoginClicked"
+                                BackgroundColor="#2457c5"
+                                TextColor="White"
+                                CornerRadius="12"
+                                HeightRequest="45"
+                                Grid.Column="0"/>
+
+                        <Button Text="Register"
+                                x:Name="RegisterButton"
+                                Clicked="OnRegisterClicked"
+                                BackgroundColor="#28a745"
+                                TextColor="White"
+                                CornerRadius="12"
+                                HeightRequest="45"
+                                Grid.Column="1"/>
+                    </Grid>
+
+                </VerticalStackLayout>
+            </Frame>
+
+
+            <!-- Select Model -->
+            <Frame CornerRadius="20"
+                   Padding="20"
+                   BackgroundColor="White"
+                   HasShadow="True">
+
+                <VerticalStackLayout Spacing="10">
+
+                    <Label Text="Select model"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="#333" />
+
+                    <Picker x:Name="ModelTypePicker">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>tumor</x:String>
+                                <x:String>fracture</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+
+
+                    <Button x:Name="UploadButton"
+                            Text="Upload &amp; Analyze"
+                            Clicked="OnUploadClicked"
+                            IsEnabled="False"
+                            BackgroundColor="#e53935"
+                            TextColor="White"
+                            CornerRadius="12"
+                            HeightRequest="45"/>
+
+                </VerticalStackLayout>
+            </Frame>
+
+
+            <ActivityIndicator x:Name="LoadingIndicator"
+                               Color="#2457c5"
+                               HeightRequest="40"
+                               WidthRequest="40"
+                               HorizontalOptions="Center"/>
+
+            <Label x:Name="ResultLabel"
+                   Text="Login to start"
+                   HorizontalOptions="Center"
+                   FontSize="18"
+                   TextColor="#555" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
