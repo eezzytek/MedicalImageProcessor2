@@ -1,74 +1,62 @@
-// hooks/useResults.ts
 import { useState, useEffect } from "react";
 import { useAuth } from "../../contexts/AuthContext";
-import type { DetectionResult } from "../../types/DetectionResult/DetectionResult";
+
+export interface DetectionResult {
+    imageId: string;
+    hasBrainTumor: boolean;
+    brainTumorConfidence: number;
+    hasFracture: boolean;
+    fractureConfidence: number;
+    createdAt: string;
+    image_url?: string;
+}
 
 export function useResults() {
-  const { user } = useAuth();
-  const [results, setResults] = useState<DetectionResult[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+    const { user } = useAuth();
+    const [results, setResults] = useState<DetectionResult[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (!user) return; // don't fetch if not logged in
-
-    const fetchResults = async () => {
-      setLoading(true);
-      setError(null);
-
-      try {
-
-        // IMPORTANT FIX: YOUR BACK MUST TAKE ID FROM TOKEN ADD TOKEN PARSE TO THE BACK + ADD ID TO THE CLAIMS
-        const token = user.token;
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/results`, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData?.message || "Failed to fetch results");
+    useEffect(() => {
+        if (!user?.token) {
+            setLoading(false);
+            return;
         }
 
-        const data: DetectionResult[] = await response.json();
-        setResults(data);
-      } catch (err: any) {
-        const mockData: DetectionResult[] = [
-          {
-            hasBrainTumor: true,
-            brainTumorConfidence: 0.92,
-            hasFracture: false,
-            fractureConfidence: 0,
-            imageId: "IMG001",
-          },
-          {
-            hasBrainTumor: false,
-            brainTumorConfidence: 0,
-            hasFracture: true,
-            fractureConfidence: 0.78,
-            imageId: "IMG002",
-          },
-          {
-            hasBrainTumor: false,
-            brainTumorConfidence: 0,
-            hasFracture: false,
-            fractureConfidence: 0,
-            imageId: "IMG003",
-          },
-        ];
+        const fetchResults = async () => {
+            setLoading(true);
+            setError(null);
 
-        setResults(mockData);
-        // UNCOMMENT IT WHEN /api/results is ready  
-        // setError(err.message || "Something went wrong");
-      } finally {
-        setLoading(false);
-      }
-    };
+            try {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/api/results`, {
+                    headers: {
+                        Authorization: `Bearer ${user.token}`,
+                    },
+                });
 
-    fetchResults();
-  }, [user]);
+                if (!response.ok) {
+                    const err = await response.json();
+                    throw new Error(err.error || "Не вдалося завантажити історію");
+                }
 
-  return { results, loading, error };
+                const data = await response.json();
+                setResults(data);
+            } catch (err: any) {
+                console.error("Results error:", err);
+                setError(err.message);
+
+                // Мок для розробки (видалити коли все працює)
+                setResults([
+                    { imageId: "demo-001", hasBrainTumor: true, brainTumorConfidence: 0.92, hasFracture: false, fractureConfidence: 0.05, createdAt: new Date().toISOString() },
+                    { imageId: "demo-002", hasBrainTumor: false, brainTumorConfidence: 0.12, hasFracture: true, fractureConfidence: 0.78, createdAt: new Date().toISOString() },
+                ]);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchResults();
+    }, [user]);
+
+    return { results, loading, error };
 }
