@@ -55,9 +55,7 @@ public partial class MainPage : ContentPage
 
     // Перевірка, чи поля не порожні і не містять тільки підказки
     if (string.IsNullOrWhiteSpace(username) || 
-        string.IsNullOrWhiteSpace(password) ||
-        username.Equals("Username", StringComparison.OrdinalIgnoreCase) ||
-        password.Equals("Password", StringComparison.OrdinalIgnoreCase))
+        string.IsNullOrWhiteSpace(password))
     {
         await DisplayAlert("Помилка", "Введіть реальний логін та пароль", "OK");
         return;
@@ -87,12 +85,15 @@ public partial class MainPage : ContentPage
             {
                 _token = token;
                 Preferences.Set("token", _token);
-                
+    
                 UploadButton.IsEnabled = true;
-                ResultLabel.Text = $"Успішно !";
+                ResultLabel.Text = $"Вітаємо, {username}!";
                 ResultLabel.TextColor = Colors.Green;
-                
-                await DisplayAlert("Успіх", $"Вітаємо, {username}!", "OK");
+
+                UsernameEntry.Text = "";
+                PasswordEntry.Text = "";
+
+                await DisplayAlert("Успіх", $"Ви успішно увійшли!", "OK");
             }
         }
         else

@@ -7,49 +7,55 @@ using MedicalImageProcessor.Application.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Supabase;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// === SUPABASE ===
+var supabaseUrl = builder.Configuration["Supabase:Url"];
+var supabaseKey = builder.Configuration["Supabase:Key"];
+
+builder.Services.AddScoped(_ => new Supabase.Client(
+    supabaseUrl,
+    supabaseKey,
+    new SupabaseOptions
+    {
+        AutoRefreshToken = true,
+        AutoConnectRealtime = true
+    }));
+
+// === CORS ===
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowFrontend",
-        policy =>
-        {
-            policy.WithOrigins("http://localhost:5173") // your Vite frontend
-                .AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowCredentials(); // if sending cookies / auth
-        });
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
 });
-// Controllers
-builder.Services.AddControllers();
 
-// Swagger + JWT
+// === Контролери, Swagger, DI ===
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Medical Image Processor API", Version = "v1" });
-
+    c.SwaggerDoc("v1", new() { Title = "Medical Image Processor API", Version = "v1" });
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
+        Description = "JWT Authorization header using the Bearer scheme.",
         Name = "Authorization",
+        In = ParameterLocation.Header,
         Type = SecuritySchemeType.Http,
         Scheme = "bearer",
-        BearerFormat = "JWT",
-        In = ParameterLocation.Header,
-        Description = "Введіть JWT токен у форматі: Bearer {token}"
+        BearerFormat = "JWT"
     });
-
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {
             new OpenApiSecurityScheme
             {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
+                Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
             },
             Array.Empty<string>()
         }
@@ -62,7 +68,7 @@ builder.Services.AddScoped<IImageProcessor, OnnxImageProcessor>();
 builder.Services.AddScoped<IDetectionService, OnnxDetectionService>();
 builder.Services.AddScoped<ImageDetectionService>();
 
-// JWT Authentication
+// === JWT ===
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -70,7 +76,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         {
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"] ?? "your-secret-key-min-32-chars")),
+                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"] ?? "your-very-long-secret-key-here-1234567890")),
             ValidateIssuer = false,
             ValidateAudience = false
         };
@@ -79,18 +85,17 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
-app.UseCors("AllowFrontend");
-// Middleware
+
+// === Middleware ===
+app.UseCors("AllowAll");
+
 if (app.Environment.IsDevelopment())
 {
-    app.UseDeveloperExceptionPage();
-
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1");
-        c.RoutePrefix = "swagger"; // Swagger UI буде на /swagger
-        c.EnablePersistAuthorization(); // зберігати токен після введення
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Medical API v1");
+        c.RoutePrefix = "swagger";
     });
 }
 

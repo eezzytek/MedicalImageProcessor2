@@ -412,6 +412,10 @@
             "NSwag.AspNetCore": {
               "target": "Package",
               "version": "[14.6.3, )"
+            },
+            "Supabase": {
+              "target": "Package",
+              "version": "[1.1.1, )"
             }
           },
           "imports": [
@@ -1118,6 +1122,10 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "dependencies": {
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.0.3, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[9.0.11, )"
@@ -1133,6 +1141,14 @@
             "Supabase": {
               "target": "Package",
               "version": "[1.1.1, )"
+            },
+            "Supabase.Postgrest": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
+            "Supabase.Storage": {
+              "target": "Package",
+              "version": "[2.4.1, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

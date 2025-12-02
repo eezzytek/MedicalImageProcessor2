@@ -1,81 +1,96 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
+using Supabase;
+using BCrypt.Net;
+using MedicalImageProcessor.WebApi.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using System.Collections.Concurrent;  // Для ConcurrentDictionary
 
-[ApiController]
-[Route("api/[controller]")]
-public class AuthController : ControllerBase
+namespace MedicalImageProcessor.WebApi.Controllers
 {
-    private readonly IConfiguration _config;
-    private static readonly ConcurrentDictionary<string, UserRecord> Users = new();  // ФІКС: In-memory users (username → hashed password)
-
-    public AuthController(IConfiguration config)
+    [ApiController]
+    [Route("api/auth")]
+    public class AuthController : ControllerBase
     {
-        _config = config;
-    }
+        private readonly Supabase.Client _supabase;
+        private readonly IConfiguration _config;
 
-    [HttpPost("register")]
-    public IActionResult Register([FromBody] RegisterDto dto)
-    {
-        if (string.IsNullOrEmpty(dto.Email) || string.IsNullOrEmpty(dto.Password))
-            return BadRequest("Username and password required");
-
-        if (Users.ContainsKey(dto.Email))
-            return BadRequest("User already exists");
-
-        var userId = Guid.NewGuid().ToString();
-        // ФІКС: Зберігаємо hashed password (проста хеш, в production — BCrypt)
-        var hashedPassword = SimpleHash(dto.Password);  // Заміни на реальний hash
-        Users[dto.Email] = new UserRecord(userId, hashedPassword);
-
-        return Ok(new { Token = GenerateToken(dto.Email, userId) });
-    }
-
-    [HttpPost("login")]
-    public IActionResult Login([FromBody] LoginDto dto)
-    {
-        if (!Users.TryGetValue(dto.Email, out var user))
-            return Unauthorized("Invalid credentials");
-
-        if (SimpleHash(dto.Password) != user.HashedPassword)
-            return Unauthorized("Invalid credentials");
-
-        return Ok(new { Token = GenerateToken(dto.Email, user.UserId) });
-    }
-
-    private string GenerateToken(string username, string userId)
-    {
-        
-        var claims = new[]
+        public AuthController(Supabase.Client supabase, IConfiguration config)
         {
-            new Claim(ClaimTypes.Name, username),
-            new Claim(ClaimTypes.NameIdentifier, userId)
-        };
-        
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"] ?? "your-secret-key-min-32-chars"));
-        
-        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            _supabase = supabase;
+            _config = config;
+        }
 
-        var token = new JwtSecurityToken(
-            issuer: "MedicalAPI",
-            audience: "Users",
-            claims: claims,
-            expires: DateTime.Now.AddDays(1),
-            signingCredentials: creds);
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterDto dto)
+        {
+            var existing = await _supabase
+                .From<UserRecord>()
+                .Where(x => x.Username == dto.Username)
+                .Single();
 
-        return new JwtSecurityTokenHandler().WriteToken(token);
+            if (existing != null)
+                return BadRequest("Користувач вже існує");
+
+            var user = new UserRecord
+            {
+                Username = dto.Username,
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password) // Тепер працює!
+            };
+
+            await _supabase.From<UserRecord>().Insert(user);
+
+            var token = GenerateJwt(user.Id.ToString(), dto.Username);
+            return Ok(new { token });
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginDto dto)
+        {
+            var user = await _supabase
+                .From<UserRecord>()
+                .Where(x => x.Username == dto.Username)
+                .Single();
+
+            if (user == null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash)) // Тепер працює!
+                return BadRequest("Неправильний логін або пароль");
+
+            var token = GenerateJwt(user.Id.ToString(), dto.Username);
+            return Ok(new { token });
+        }
+
+        private string GenerateJwt(string userId, string username)
+        {
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]!));
+            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, userId),
+                new Claim(ClaimTypes.Name, username)
+            };
+
+            var token = new JwtSecurityToken(
+                issuer: null,
+                audience: null,
+                claims: claims,
+                expires: DateTime.Now.AddDays(7),
+                signingCredentials: credentials);
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
     }
 
-    // Проста хеш (для демо; в production — BCrypt.Net)
-    private static string SimpleHash(string password)
+    public class RegisterDto
     {
-        return Convert.ToBase64String(System.Security.Cryptography.SHA256.HashData(Encoding.UTF8.GetBytes(password)));
+        public string Username { get; set; } = null!;
+        public string Password { get; set; } = null!;
+    }
+
+    public class LoginDto
+    {
+        public string Username { get; set; } = null!;
+        public string Password { get; set; } = null!;
     }
 }
-
-public class LoginDto { public string Email { get; set; } = string.Empty; public string Password { get; set; } = string.Empty; }
-public class RegisterDto { public string Email { get; set; } = string.Empty; public string Password { get; set; } = string.Empty; }
-public record UserRecord (string UserId, string HashedPassword);

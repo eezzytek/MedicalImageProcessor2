@@ -258,3 +258,5 @@ C:/COURSE_3/MedicalImageProcessor2/MedicalImageProcessor.WebApi/obj/Debug/net10.
 /Users/vladyslav.husenko/Downloads/MedicalImageProcessor2/MedicalImageProcessor2/MedicalImageProcessor.WebApi/bin/Debug/net10.0/Supabase.Storage.dll
 /Users/vladyslav.husenko/Downloads/MedicalImageProcessor2/MedicalImageProcessor2/MedicalImageProcessor.WebApi/bin/Debug/net10.0/System.Reactive.dll
 /Users/vladyslav.husenko/Downloads/MedicalImageProcessor2/MedicalImageProcessor2/MedicalImageProcessor.WebApi/bin/Debug/net10.0/Websocket.Client.dll
+/Users/vladyslav.husenko/Downloads/MedicalImageProcessor2/MedicalImageProcessor2/MedicalImageProcessor.WebApi/bin/Debug/net10.0/BirdMessenger.dll
+/Users/vladyslav.husenko/Downloads/MedicalImageProcessor2/MedicalImageProcessor2/MedicalImageProcessor.WebApi/bin/Debug/net10.0/BCrypt.Net-Next.dll

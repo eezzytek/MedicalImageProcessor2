@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MedicalImageProcessor.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+86c756efb36e7d864a37ba68e1886065c99b3d0d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4b4c4df0ed03b34893a4adaddbf63904baf41d8a")]
 [assembly: System.Reflection.AssemblyProductAttribute("MedicalImageProcessor.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MedicalImageProcessor.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

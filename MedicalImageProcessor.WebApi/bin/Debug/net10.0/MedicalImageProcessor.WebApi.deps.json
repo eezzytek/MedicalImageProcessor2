@@ -8,17 +8,36 @@
     ".NETCoreApp,Version=v10.0": {
       "MedicalImageProcessor.WebApi/1.0.0": {
         "dependencies": {
+          "BCrypt.Net-Next": "4.0.3",
           "MedicalImageProcessor.Application": "1.0.0",
           "MedicalImageProcessor.Core": "1.0.0",
           "MedicalImageProcessor.Infrastructure": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "9.0.11",
           "Microsoft.AspNetCore.OpenApi": "9.0.0",
           "Supabase": "1.1.1",
+          "Supabase.Postgrest": "4.1.0",
+          "Supabase.Storage": "2.4.1",
           "Swashbuckle.AspNetCore": "6.9.0",
           "Swashbuckle.AspNetCore.SwaggerUI": "6.9.0"
         },
         "runtime": {
           "MedicalImageProcessor.WebApi.dll": {}
+        }
+      },
+      "BCrypt.Net-Next/4.0.3": {
+        "runtime": {
+          "lib/net6.0/BCrypt.Net-Next.dll": {
+            "assemblyVersion": "4.0.3.0",
+            "fileVersion": "4.0.3.0"
+          }
+        }
+      },
+      "BirdMessenger/3.1.4": {
+        "runtime": {
+          "lib/net8.0/BirdMessenger.dll": {
+            "assemblyVersion": "3.1.4.0",
+            "fileVersion": "3.1.4.0"
+          }
         }
       },
       "Microsoft.AspNetCore.Authentication.JwtBearer/9.0.11": {
@@ -388,9 +407,9 @@
           "Supabase.Core": "1.0.0",
           "Supabase.Functions": "2.0.0",
           "Supabase.Gotrue": "6.0.3",
-          "Supabase.Postgrest": "4.0.3",
+          "Supabase.Postgrest": "4.1.0",
           "Supabase.Realtime": "7.0.2",
-          "Supabase.Storage": "2.0.2"
+          "Supabase.Storage": "2.4.1"
         },
         "runtime": {
           "lib/netstandard2.1/Supabase.dll": {
@@ -432,15 +451,15 @@
           }
         }
       },
-      "Supabase.Postgrest/4.0.3": {
+      "Supabase.Postgrest/4.1.0": {
         "dependencies": {
           "Newtonsoft.Json": "13.0.3",
           "Supabase.Core": "1.0.0"
         },
         "runtime": {
           "lib/netstandard2.0/Supabase.Postgrest.dll": {
-            "assemblyVersion": "4.0.3.0",
-            "fileVersion": "4.0.3.0"
+            "assemblyVersion": "4.1.0.0",
+            "fileVersion": "4.1.0.0"
           }
         }
       },
@@ -448,7 +467,7 @@
         "dependencies": {
           "Newtonsoft.Json": "13.0.3",
           "Supabase.Core": "1.0.0",
-          "Supabase.Postgrest": "4.0.3",
+          "Supabase.Postgrest": "4.1.0",
           "Websocket.Client": "5.1.1"
         },
         "runtime": {
@@ -458,16 +477,17 @@
           }
         }
       },
-      "Supabase.Storage/2.0.2": {
+      "Supabase.Storage/2.4.1": {
         "dependencies": {
+          "BirdMessenger": "3.1.4",
           "MimeMapping": "3.0.1",
           "Newtonsoft.Json": "13.0.3",
           "Supabase.Core": "1.0.0"
         },
         "runtime": {
           "lib/netstandard2.0/Supabase.Storage.dll": {
-            "assemblyVersion": "2.0.2.0",
-            "fileVersion": "2.0.2.0"
+            "assemblyVersion": "2.4.1.0",
+            "fileVersion": "2.4.1.0"
           }
         }
       },
@@ -572,7 +592,8 @@
       "MedicalImageProcessor.Core/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Authentication.JwtBearer": "9.0.11",
-          "NSwag.AspNetCore": "14.6.3"
+          "NSwag.AspNetCore": "14.6.3",
+          "Supabase": "1.1.1"
         },
         "runtime": {
           "MedicalImageProcessor.Core.dll": {
@@ -604,6 +625,20 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "BCrypt.Net-Next/4.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-W+U9WvmZQgi5cX6FS5GDtDoPzUCV4LkBLkywq/kRZhuDwcbavOzcDAr3LXJFqHUi952Yj3LEYoWW0jbEUQChsA==",
+      "path": "bcrypt.net-next/4.0.3",
+      "hashPath": "bcrypt.net-next.4.0.3.nupkg.sha512"
+    },
+    "BirdMessenger/3.1.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-OkVRhxErBUC8n+nSdiHet8RAawrA3G2vaBAT1oiCm7BohbvgydfhPfatj4TEwPgE0ia/yI+6BMgQO9u8VcJE/g==",
+      "path": "birdmessenger/3.1.4",
+      "hashPath": "birdmessenger.3.1.4.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Authentication.JwtBearer/9.0.11": {
       "type": "package",
@@ -815,12 +850,12 @@
       "path": "supabase.gotrue/6.0.3",
       "hashPath": "supabase.gotrue.6.0.3.nupkg.sha512"
     },
-    "Supabase.Postgrest/4.0.3": {
+    "Supabase.Postgrest/4.1.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-hpDIh+E5bDgZiHMuM6l+RDm9WWlt/T3fXXFQoqzlsrJFesFMNzkK9feVBG5egJyL/OlwmxuLsnPkR7O+bV3Vcw==",
-      "path": "supabase.postgrest/4.0.3",
-      "hashPath": "supabase.postgrest.4.0.3.nupkg.sha512"
+      "sha512": "sha512-DwgBVeU3Xjo1pr7vJ7EiTEHFHa7bN4CwOvsiDqTFfT5Q8Dq1Ok/KT7P6XUbs578zYA2uQb7II8TLo0dfv6Qx5g==",
+      "path": "supabase.postgrest/4.1.0",
+      "hashPath": "supabase.postgrest.4.1.0.nupkg.sha512"
     },
     "Supabase.Realtime/7.0.2": {
       "type": "package",
@@ -829,12 +864,12 @@
       "path": "supabase.realtime/7.0.2",
       "hashPath": "supabase.realtime.7.0.2.nupkg.sha512"
     },
-    "Supabase.Storage/2.0.2": {
+    "Supabase.Storage/2.4.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-YKxgwVgLjxi32ze29FT8aSLifiTVSZSxSyI9taOewp6wuxh+aMIPLKWtGEhFhegLv2iFwGcZ3ybMDkCi6RB7Rw==",
-      "path": "supabase.storage/2.0.2",
-      "hashPath": "supabase.storage.2.0.2.nupkg.sha512"
+      "sha512": "sha512-nCb4tOVxBWB8LCM1ZW8RYU94bGKpTs87K/AvBboCPHq4pp3QBoyPziax0SWSaj3Df8M2cfbbsmQAu8qms8+uDg==",
+      "path": "supabase.storage/2.4.1",
+      "hashPath": "supabase.storage.2.4.1.nupkg.sha512"
     },
     "Swashbuckle.AspNetCore/6.9.0": {
       "type": "package",
