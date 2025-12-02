@@ -1,44 +1,50 @@
 // hooks/useRegister.ts
 import { useState } from "react";
-import type { UserRegisterDto } from "../../types/User/UserRegisterDto";
+import type { UserRegisterDto } from "../../types/User/User";
 import type { User } from "../../types/User/User";
 import { useAuth } from "../../contexts/AuthContext";
 
 export function useRegister() {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const { login } = useAuth(); // Automatically log in user after register
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    const { login } = useAuth();
 
-  const registerUser = async (userDto: UserRegisterDto) => {
-    setLoading(true);
-    setError(null);
+    const registerUser = async (dto: UserRegisterDto) => {
+        setLoading(true);
+        setError(null);
 
-    if (userDto.password !== userDto.confirmPassword) {
-      setError("Passwords do not match");
-      setLoading(false);
-      return;
-    }
+        if (dto.password.length < 6) {
+            setError("Пароль має бути мінімум 6 символів");
+            setLoading(false);
+            return;
+        }
 
-    try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/Auth/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userDto),
-      });
+        try {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/register`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(dto),
+            });
 
-      if (!response.ok) {
-        const errorData = await response.text();
-        throw new Error(errorData || "Registration failed");
-      }
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(errorText || "Користувач вже існує");
+            }
 
-      const data: User = await response.json();
-      login(data); // Store user in context & localStorage
-    } catch (err: any) {
-      setError(err.message || "Something went wrong");
-    } finally {
-      setLoading(false);
-    }
-  };
+            const data = await response.json();
+            const user: User = {
+                id: data.userId || "unknown",
+                username: dto.username,
+                token: data.token,
+            };
 
-  return { registerUser, loading, error };
+            login(user);
+        } catch (err: any) {
+            setError(err.message || "Помилка реєстрації");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return { registerUser, loading, error };
 }
